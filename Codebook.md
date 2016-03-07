@@ -337,7 +337,8 @@ Detail process of the project
     ##   [list output truncated]
 
  1. Merges the training and testing datasets  to one data 
------------------------------------------------------------
+----------------------------------------------------------
+
     dataSubject <- rbind(dataSubject_Train, dataSubject_Test)
     dataActivity<- rbind(dataactivity_Train, dataactivity_Test)
     data_vars<- rbind(data_Train, data_Test)
@@ -358,13 +359,15 @@ Detail process of the project
 
 
 2.Extracts only the measurements on the mean and standard deviation for each measurement.
-------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------
 
     subdataNames<-data_varsNames$V2[grep("mean\\(\\)|std\\(\\)", data_varsNames$V2)]
     selected_names<-c("subject","activity",as.character(subdataNames))
     Data_all<-subset(Data_all,select=selected_names)
 
-3. Uses descriptive activity names to name the activities in the data set  -------------------------------------------------------------------------------
+3. Uses descriptive activity names to name the activities in the data set 
+--------------------------------------------------------------------------
+
     ### create factor of activity var and add label from actitiy_labels.txt
 
     activityLabels <- read.table(file.path(path_list, "activity_labels.txt"),header = FALSE)
@@ -376,8 +379,10 @@ Detail process of the project
 
     ## [1] STANDING STANDING STANDING STANDING STANDING
     ## 6 Levels: WALKING WALKING_UPSTAIRS WALKING_DOWNSTAIRS ... LAYING
+    
 
 4. Propriately labels the data set with descriptive variable names.
+
 ----------------------------------------------------------------------
     ###  information is from features_info.txt
 
@@ -505,6 +510,7 @@ Detail process of the project
     ## [66] "frequencyBodyGyroscopeMagnitude-std()"         
     ## [67] "frequencyBodyGyroscopeJerkMagnitude-mean()"    
     ## [68] "frequencyBodyGyroscopeJerkMagnitude-std()"
+    
 5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 ---------------------------------------------------------------------------------------------------------------------------------------
     library(plyr);
