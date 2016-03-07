@@ -1,8 +1,8 @@
-    Getting and Cleaning Data Course Project
-    =========================================
+Getting and Cleaning Data Course Project
+=========================================
 
-    Purpose of the poject 
-    ---------------------------
+Purpose of the poject 
+---------------------------
     The purpose of this project is to demonstrate your ability to collect, 
     work with, and clean a data set. The goal is to prepare tidy data that 
     can be used for later analysis. You will be graded by your peers on a series of yes/no
@@ -12,8 +12,8 @@
     
     http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
     
-     Data source 
-    --------------------
+Data source 
+--------------------
     # Here are the data for the project:
     #         
     #  https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
@@ -21,8 +21,8 @@
     # ## Variables and Data information 
     # ## Please refer to README.txt and features_info.txt for details
 
-    Process of the project 
-    --------------------------
+Process of the project 
+--------------------------
     # You should create one R script called run_analysis.R that does the following.
     # 
     # * 1.Merges the training and the test sets to create one data set.
@@ -46,8 +46,8 @@
       "test/X_test.txt" ,
       "train/y_train.txt" 
 
-    Detail process of the project 
-    ---------------------------------
+Detail process of the project 
+---------------------------------
 
     ###  download file  and put in data folder , named datasets.zip
 
@@ -336,8 +336,8 @@
     ##  $ V99 : num  -0.997 -0.999 -0.999 -0.999 -1 ...
     ##   [list output truncated]
 
-     1. Merges the training and testing datasets  to one data 
-    ------------------------------------------------------------
+ 1. Merges the training and testing datasets  to one data 
+-----------------------------------------------------------
     dataSubject <- rbind(dataSubject_Train, dataSubject_Test)
     dataActivity<- rbind(dataactivity_Train, dataactivity_Test)
     data_vars<- rbind(data_Train, data_Test)
@@ -357,18 +357,14 @@
     Data_all <- cbind(data_vars, dataC1) 
 
 
-
-    2.Extracts only the measurements on the mean and standard deviation for each measurement.
+2.Extracts only the measurements on the mean and standard deviation for each measurement.
 ------------------------------------------------------------------------------------------------
 
     subdataNames<-data_varsNames$V2[grep("mean\\(\\)|std\\(\\)", data_varsNames$V2)]
     selected_names<-c("subject","activity",as.character(subdataNames))
     Data_all<-subset(Data_all,select=selected_names)
 
-
-
-    3. Uses descriptive activity names to name the activities in the data set 
-    -------------------------------------------------------------------------------
+3. Uses descriptive activity names to name the activities in the data set  -------------------------------------------------------------------------------
     ### create factor of activity var and add label from actitiy_labels.txt
 
     activityLabels <- read.table(file.path(path_list, "activity_labels.txt"),header = FALSE)
@@ -381,8 +377,8 @@
     ## [1] STANDING STANDING STANDING STANDING STANDING
     ## 6 Levels: WALKING WALKING_UPSTAIRS WALKING_DOWNSTAIRS ... LAYING
 
-    4. Propriately labels the data set with descriptive variable names.
-    ----------------------------------------------------------------------
+4. Propriately labels the data set with descriptive variable names.
+----------------------------------------------------------------------
     ###  information is from features_info.txt
 
     # * prefix t is replaced by time
@@ -509,8 +505,7 @@
     ## [66] "frequencyBodyGyroscopeMagnitude-std()"         
     ## [67] "frequencyBodyGyroscopeJerkMagnitude-mean()"    
     ## [68] "frequencyBodyGyroscopeJerkMagnitude-std()"
-
-     5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
+5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 ---------------------------------------------------------------------------------------------------------------------------------------
     library(plyr);
     ?aggregate
