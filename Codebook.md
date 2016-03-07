@@ -1,20 +1,16 @@
-    #Getting and Cleaning Data Course Project
+    # Getting and Cleaning Data Course Project
 
-    ## Purpose of the poject 
-    # The purpose of this project is to demonstrate your ability to collect, 
-    # work with, and clean a data set. The goal is to prepare tidy data that 
-    # can be used for later analysis. You will be graded by your peers on a series of yes/no
-    # questions related to the project. You will be required to submit: 
-    # 1) a tidy data set as 
-    # described below, 2) a link to a Github repository with your script for performing 
-    # the analysis, and 3) a code book that describes the variables, 
-    # the data, and any transformations or work that you performed to clean up 
-    # the data called CodeBook.md. You should also include a README.md in the repo 
-    # with your scripts. This repo explains how all of the scripts work and how they are connected.
-    # 
-    #  http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
-    # 
-    # ## Data source 
+    ##  Purpose of the poject 
+    The purpose of this project is to demonstrate your ability to collect, 
+    work with, and clean a data set. The goal is to prepare tidy data that 
+    can be used for later analysis. You will be graded by your peers on a series of yes/no
+    questions related to the project. You will be required to submit: 
+    1) a tidy data set as  described below, 2) a link to a Github repository with your script for performing 
+    the analysis, and 3) a code book that describes the variables, the data, and any transformations or work that you performed to clean     up  the data called CodeBook.md. You should also include a README.md in the repo  with your scripts. This repo explains how all of       the scripts work and how they are connected.
+    
+    http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
+    
+    ##  Data source 
     # Here are the data for the project:
     #         
     #  https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
@@ -48,16 +44,16 @@
 
     ## Detail process of the project 
 
-    ### download file  and put in data folder , named datasets.zip
+    ###  download file  and put in data folder , named datasets.zip
 
     if(!file.exists("./data")){dir.create("./data")}
     fileUrl <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
     download.file(fileUrl,destfile="./data/Dataset.zip",method="curl")
 
-    ### un-zip files 
+    ###  un-zip files 
     unzip(zipfile="./data/Dataset.zip",exdir="./data")
 
-    ### unzip files saved under UCI HAR Dataset folder , list all files in the folder 
+    ###  unzip files saved under UCI HAR Dataset folder , list all files in the folder 
     path_list<- file.path("./data" , "UCI HAR Dataset")
     files<-list.files(path_list, recursive=TRUE)
     files
@@ -335,12 +331,12 @@
     ##  $ V99 : num  -0.997 -0.999 -0.999 -0.999 -1 ...
     ##   [list output truncated]
 
-    ## 1. Merges the training and testing datasets  to one data 
+    ##  1. Merges the training and testing datasets  to one data 
     dataSubject <- rbind(dataSubject_Train, dataSubject_Test)
     dataActivity<- rbind(dataactivity_Train, dataactivity_Test)
     data_vars<- rbind(data_Train, data_Test)
 
-    ### add names to variables in each table 
+    ###  add names to variables in each table 
 
     names(dataSubject)<-c("subject")
     names(dataActivity)<- c("activity")
@@ -348,7 +344,7 @@
     names(data_vars)<- data_varsNames$V2
 
 
-    ### merge all three datasets to one 
+    ###  merge all three datasets to one 
 
     dataC1<- cbind(dataSubject, dataActivity)
     Data_all <- cbind(data_vars, dataC1) 
@@ -588,7 +584,7 @@
     ##  $ frequencyBodyGyroscopeJerkMagnitude-mean()    : num  -0.319 -0.583 -0.608 -0.724 -0.548 ...
     ##  $ frequencyBodyGyroscopeJerkMagnitude-std()     : num  -0.382 -0.558 -0.549 -0.758 -0.456 ...
 
-    ## NULL
 
-    ####The tidydata  contains sets of variables for each activity and each subject
-    ####there are 180 rows with 68 variables- 33 means and 33 Standard deviation variables , 1 subject variable and 1 activity variable .
+
+    The tidydata  contains sets of variables for each activity and each subject
+    there are 180 rows with 68 variables- 33 means and 33 Standard deviation variables , 1 subject variable and 1 activity variable .
