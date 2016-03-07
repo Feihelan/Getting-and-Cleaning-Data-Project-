@@ -382,7 +382,6 @@ Detail process of the project
     
 
 4. Propriately labels the data set with descriptive variable names.
-
 ----------------------------------------------------------------------
     ###  information is from features_info.txt
 
