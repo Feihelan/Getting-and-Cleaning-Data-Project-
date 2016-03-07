@@ -1,6 +1,8 @@
     # Getting and Cleaning Data Course Project
+    =========================================
 
     ##  Purpose of the poject 
+    ---------------------------
     The purpose of this project is to demonstrate your ability to collect, 
     work with, and clean a data set. The goal is to prepare tidy data that 
     can be used for later analysis. You will be graded by your peers on a series of yes/no
@@ -11,6 +13,7 @@
     http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
     
     ##  Data source 
+    --------------------
     # Here are the data for the project:
     #         
     #  https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
@@ -19,6 +22,7 @@
     # ## Please refer to README.txt and features_info.txt for details
 
     ## Process of the project 
+    --------------------------
     # You should create one R script called run_analysis.R that does the following.
     # 
     # * 1.Merges the training and the test sets to create one data set.
@@ -30,19 +34,20 @@
     # 
     ### Files used in the project 
     # 
-    # * "activity_labels.txt"                         
-    # * "features.txt"   
-    # * subject files :
-    # "test/subject_test.txt" ,
-    # "train/subject_train.txt" 
-    # * activtiy files :
-    # "test/y_test.txt" ,
-    # "train/y_train.txt"  
-    # * feature files :
-    # "test/X_test.txt" ,
-    # "train/y_train.txt" 
+    * "activity_labels.txt"                         
+    * "features.txt"   
+    * subject files :
+      "test/subject_test.txt" ,
+      "train/subject_train.txt" 
+    * activtiy files :
+      "test/y_test.txt" ,
+      "train/y_train.txt"  
+    * feature files :
+      "test/X_test.txt" ,
+      "train/y_train.txt" 
 
     ## Detail process of the project 
+    ---------------------------------
 
     ###  download file  and put in data folder , named datasets.zip
 
@@ -332,11 +337,13 @@
     ##   [list output truncated]
 
     ##  1. Merges the training and testing datasets  to one data 
+    ------------------------------------------------------------
     dataSubject <- rbind(dataSubject_Train, dataSubject_Test)
     dataActivity<- rbind(dataactivity_Train, dataactivity_Test)
     data_vars<- rbind(data_Train, data_Test)
 
     ###  add names to variables in each table 
+    
 
     names(dataSubject)<-c("subject")
     names(dataActivity)<- c("activity")
@@ -352,7 +359,7 @@
 
 
     ## 2.Extracts only the measurements on the mean and standard deviation for each measurement.
-
+------------------------------------------------------------------------------------------------
 
     subdataNames<-data_varsNames$V2[grep("mean\\(\\)|std\\(\\)", data_varsNames$V2)]
     selected_names<-c("subject","activity",as.character(subdataNames))
@@ -361,6 +368,7 @@
 
 
     ## 3. Uses descriptive activity names to name the activities in the data set 
+    -------------------------------------------------------------------------------
     ### create factor of activity var and add label from actitiy_labels.txt
 
     activityLabels <- read.table(file.path(path_list, "activity_labels.txt"),header = FALSE)
@@ -374,6 +382,7 @@
     ## 6 Levels: WALKING WALKING_UPSTAIRS WALKING_DOWNSTAIRS ... LAYING
 
     ##4. Propriately labels the data set with descriptive variable names.
+    ----------------------------------------------------------------------
     ###  information is from features_info.txt
 
     # * prefix t is replaced by time
@@ -502,7 +511,7 @@
     ## [68] "frequencyBodyGyroscopeJerkMagnitude-std()"
 
     ## 5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
-
+---------------------------------------------------------------------------------------------------------------------------------------
     library(plyr);
     ?aggregate
     tidydata<-aggregate(. ~subject + activity, Data_all, mean)
@@ -585,6 +594,7 @@
     ##  $ frequencyBodyGyroscopeJerkMagnitude-std()     : num  -0.382 -0.558 -0.549 -0.758 -0.456 ...
 
 
-
+tidy data
+---------
     The tidydata  contains sets of variables for each activity and each subject
     there are 180 rows with 68 variables- 33 means and 33 Standard deviation variables , 1 subject variable and 1 activity variable .
